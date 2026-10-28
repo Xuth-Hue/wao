@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>生日快乐</title>
+    <style>
+        body {
+            background-color: #FFF1EE;
+            text-align: center;
+            font-family: '微软雅黑', sans-serif;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #ffd700;
+            font-size: 48px;
+            margin-top: 15vh;
+            text-shadow: 2px 2px 4px #ffc9c9;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+        p {
+            color: #888899;
+            font-size: 18px;
+            opacity: 0;
+            animation: fadeIn 2s 1s forwards;
+        }
+        .footer {
+            color: #bb9999;
+            font-size: 14px;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 2s 2s forwards;
+        }
+        /* 爱心飘落动画 */
+        .heart {
+            position: absolute;
+            color: #ff6b6b;
+            font-size: 24px;
+            bottom: -50px;
+            animation: floatUp linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>生日快乐，贾甜！</h1>
+    <p>愿新的一岁，平安开心，所有美好的事情都慢慢奔向你。</p>
+    <div class="footer">—— 良辰添芳岁，风月自温柔。</div>
+
+    <script>
+        // 生成随机飘落的爱心和星星
+        const emojis = ['❤️', '✨', '🎈', '🎂', '🌸'];
+        for (let i = 0; i < 40; i++) {
+            let heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            // 随机大小、随机速度、随机延迟
+            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+            heart.style.animationDuration = Math.random() * 4 + 4 + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(heart);
+        }
+    </script>
+
+</body>
+<audio id="bgm" src="birthday.mp3" loop></audio>
+<script>
+    // 监听整个网页的点击事件
+    document.addEventListener('click', function() {
+        var bgm = document.getElementById('bgm');
+        // 如果音乐是暂停状态，就播放它
+        if (bgm.paused) {
+            bgm.play();
+            // 在屏幕上提示一下
+            var tip = document.createElement('div');
+            tip.innerText = "🎵 音乐已开启";
+            tip.style.position = "absolute";
+            tip.style.top = "10px";
+            tip.style.left = "10px";
+            tip.style.color = "#ff6b6b";
+            document.body.appendChild(tip);
+            setTimeout(function(){ tip.remove(); }, 3000); // 提示3秒后消失
+        }
+    });
+</script>
+</html>
